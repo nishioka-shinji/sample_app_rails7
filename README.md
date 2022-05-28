@@ -1,24 +1,21 @@
-# README
+# sample_app_rails7
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## こちらを参考に構築
+https://qiita.com/croquette0212/items/7b99d9339fd773ddf20b
+### 構築手順概要
+1. 設定ファイルの準備
+2. Railsプロジェクトの作成
+```
+docker-compose run web rails new . --force --no-deps --database=mysql
+```
+3. DB接続設定
+4. DB作成
+```
+docker-compose run web rails db:create
+```
+5. イメージの起動
+```
+docker-compose up
+```
+### 構築時遭遇したトラブル
+[docディレクトリにメモあり](/doc)
