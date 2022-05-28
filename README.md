@@ -1,0 +1,1 @@
+# sample_app_rails7
