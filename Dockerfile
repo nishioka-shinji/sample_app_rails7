@@ -4,6 +4,7 @@ RUN mkdir /sample_app_rails7
 WORKDIR /sample_app_rails7
 COPY Gemfile /sample_app_rails7/Gemfile
 COPY Gemfile.lock /sample_app_rails7/Gemfile.lock
+RUN gem install bundler -v '2.3.14'
 RUN bundle install
 COPY . /sample_app_rails7
 
