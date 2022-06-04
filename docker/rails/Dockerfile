@@ -1,4 +1,10 @@
-FROM ruby:3.1.2
+FROM ruby:3.1.2-slim
+
+RUN apt-get update && \
+    apt-get install -y gcc \
+                       g++ \
+                       make \
+                       default-libmysqlclient-dev
 
 RUN mkdir /sample_app_rails7
 WORKDIR /sample_app_rails7
