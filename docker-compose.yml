@@ -9,15 +9,28 @@ services:
       - "3306:3306"
     volumes:
       - ./tmp/db:/var/lib/mysql
-
-  web:
+  nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    environment:
+      - AUTH_BASIC_USERNAME=user
+      - AUTH_BASIC_PASSWORD=password
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/nginx/etc/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+      - ./tmp/sockets:/sample_app_rails7/tmp/sockets
+      - ./public:/sample_app_rails7/public
+  rails:
     build:
       context: .
       dockerfile: ./docker/rails/Dockerfile
     command: bash -c "rm -f tmp/pids/unicorn.pid && bundle exec unicorn_rails -c config/unicorn.rb"
     volumes:
       - .:/sample_app_rails7
-    ports:
-      - "8080:8080"
+      - ./tmp/sockets:/sample_app_rails7/tmp/sockets
+      - ./public:/sample_app_rails7/public
     depends_on:
       - db
+      - nginx
