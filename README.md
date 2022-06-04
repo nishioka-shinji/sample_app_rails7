@@ -2,10 +2,11 @@
 ![](https://img.shields.io/badge/rails-7.0.3-red.svg)
 ![](https://img.shields.io/badge/ruby-3.1.2-orange.svg)
 ![](https://img.shields.io/badge/mysql-8.0.29-blue.svg)
+![](https://img.shields.io/badge/nginx-1.21.6-green.svg)
 
 ## こちらを参考に構築
 https://qiita.com/croquette0212/items/7b99d9339fd773ddf20b
-### 構築手順概要
+### rails on docker構築手順概要
 1. 設定ファイルの準備
 2. Railsプロジェクトの作成
 ```
