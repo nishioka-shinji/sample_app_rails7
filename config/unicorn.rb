@@ -37,8 +37,8 @@ pid File.expand_path('../../tmp/pids/unicorn.pid', __FILE__)
 # By default, the Unicorn logger will write to stderr.
 # Additionally, ome applications/frameworks log to stderr or stdout,
 # so prevent them from going to /dev/null when daemonized here:
-stderr_path File.expand_path('../../log/unicorn_stderr.log', __FILE__)
-stdout_path File.expand_path('../../log/unicorn_stdout.log', __FILE__)
+stderr_path = $stderr
+stdout_path = $stdout
 
 # combine Ruby 2.0.0+ with "preload_app true" for memory savings
 preload_app true
