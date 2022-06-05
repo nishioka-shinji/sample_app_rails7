@@ -13,7 +13,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/rails/Dockerfile
-    command: bash -c "rm -f tmp/pids/unicorn.pid && bundle exec unicorn_rails -c config/unicorn.rb"
+    command: ash -c "rm -f tmp/pids/unicorn.pid && bundle exec unicorn_rails -c config/unicorn.rb"
     volumes:
       - .:/sample_app_rails7
       - ./tmp/sockets:/sample_app_rails7/tmp/sockets
