@@ -1,5 +1,5 @@
 # sample_app_rails7
-![](https://img.shields.io/badge/rails-7.0.3-red.svg)
+![](https://img.shields.io/badge/rails-7.0.3.1-red.svg)
 ![](https://img.shields.io/badge/ruby-3.1.2-orange.svg)
 ![](https://img.shields.io/badge/mysql-8.0.29-blue.svg)
 ![](https://img.shields.io/badge/nginx-1.21.6-green.svg)
