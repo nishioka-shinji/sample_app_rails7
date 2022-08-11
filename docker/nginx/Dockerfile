@@ -6,4 +6,3 @@ COPY docker/nginx/etc/nginx /etc/nginx
 COPY docker/nginx/tmp/bin /tmp/bin
 
 EXPOSE 80
-ENTRYPOINT ["/tmp/bin/start.sh"]

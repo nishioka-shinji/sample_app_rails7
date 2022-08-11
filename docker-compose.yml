@@ -26,9 +26,6 @@ services:
     build:
       context: .
       dockerfile: docker/nginx/Dockerfile
-    environment:
-      - AUTH_BASIC_USERNAME=u
-      - AUTH_BASIC_PASSWORD=p
     ports:
       - "80:80"
     volumes:
