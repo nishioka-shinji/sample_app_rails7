@@ -31,5 +31,10 @@ RUN apk update && \
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
+
+RUN rm -rf /sample_app_rails7/tmp/sockets && \
+    mkdir /sample_app_rails7/tmp/sockets
+VOLUME ["/sample_app_rails7/tmp/sockets"]
+VOLUME ["/sample_app_rails7/public"]
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
