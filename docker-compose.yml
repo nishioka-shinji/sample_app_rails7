@@ -12,7 +12,7 @@ services:
   rails:
     build:
       context: .
-      dockerfile: ./docker/rails/Dockerfile
+      dockerfile: docker/rails/Dockerfile
     command: ash -c "rm -f tmp/pids/unicorn.pid && bundle exec unicorn_rails -c config/unicorn.rb"
     volumes:
       - .:/sample_app_rails7
@@ -23,7 +23,7 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: ./docker/nginx/Dockerfile
+      dockerfile: docker/nginx/Dockerfile
     environment:
       - AUTH_BASIC_USERNAME=u
       - AUTH_BASIC_PASSWORD=p
