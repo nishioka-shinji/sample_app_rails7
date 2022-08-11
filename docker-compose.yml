@@ -13,6 +13,8 @@ services:
     build:
       context: .
       dockerfile: docker/rails/Dockerfile
+    environment:
+      - MYSQL_HOST=db
     command: ash -c "rm -f tmp/pids/unicorn.pid && bundle exec unicorn_rails -c config/unicorn.rb"
     volumes:
       - .:/sample_app_rails7
