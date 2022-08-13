@@ -23,3 +23,11 @@ docker-compose up
 ```
 ### 構築時遭遇したトラブル
 [docディレクトリにメモあり](/doc)
+### ECRプッシュ時の注意点
+公式手順に準ずるが、ビルドは注意が必要
+- m1 macの場合プラットフォームを指定`--platform=linux/amd64`
+- ファイル名を指定`-f docker/nginx/Dockerfile`
+```
+docker build --platform=linux/amd64 -f docker/nginx/Dockerfile -t sample_app_rails_7/nginx .
+docker build --platform=linux/amd64 -f docker/rails/Dockerfile -t sample_app_rails_7/rails .
+```
