@@ -72,5 +72,5 @@ Rails.application.configure do
   config.hosts << 'unicorn'
 
   # ログを標準出力
-  config.logger = Logger.new(STDOUT)
+  config.logger = ActiveSupport::Logger.new(STDOUT)
 end
