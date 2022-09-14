@@ -15,7 +15,15 @@ updates:
     versioning-strategy: "lockfile-only"
     open-pull-requests-limit: 10
   - package-ecosystem: "docker"
-    directory: "/"
+    directory: "docker/nginx/"
+    target-branch: "main"
+    schedule:
+      interval: "daily"
+      time: "00:00"
+      timezone: "Asia/Tokyo"
+    open-pull-requests-limit: 10
+  - package-ecosystem: "docker"
+    directory: "docker/rails/"
     target-branch: "main"
     schedule:
       interval: "daily"
