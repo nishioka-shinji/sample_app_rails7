@@ -14,3 +14,11 @@ updates:
       timezone: "Asia/Tokyo"
     versioning-strategy: "lockfile-only"
     open-pull-requests-limit: 10
+  - package-ecosystem: "docker"
+    directory: "/"
+    target-branch: "main"
+    schedule:
+      interval: "daily"
+      time: "00:00"
+      timezone: "Asia/Tokyo"
+    open-pull-requests-limit: 10
