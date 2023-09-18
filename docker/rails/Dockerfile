@@ -10,15 +10,15 @@ COPY . /sample_app_rails7
 
 RUN apk update && \
     apk add --no-cache \
-        gcc \
-        g++ \
-        make \
-        libxml2-dev \
-        libxslt-dev \
-        mariadb-dev \
-        gcompat \
-        tzdata && \
-    gem install bundler -v '2.3.14' && \
+    gcc \
+    g++ \
+    make \
+    libxml2-dev \
+    libxslt-dev \
+    mariadb-dev \
+    gcompat \
+    tzdata && \
+    gem install bundler -v '2.4.19' && \
     bundle install && \
     rm -rf /usr/local/bundle/cache/* /usr/local/share/.cache/* /var/cache/* /tmp/* && \
     apk del gcc g++ make libxml2-dev libxslt-dev

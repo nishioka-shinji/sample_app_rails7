@@ -10,16 +10,16 @@ https://qiita.com/croquette0212/items/7b99d9339fd773ddf20b
 1. 設定ファイルの準備
 2. Railsプロジェクトの作成
 ```
-docker-compose run web rails new . --force --no-deps --database=mysql
+docker compose run rails_app rails new . --force --no-deps --database=mysql
 ```
 3. DB接続設定
 4. DB作成
 ```
-docker-compose run web rails db:create
+docker compose run --rm rails_app rails db:create
 ```
 5. イメージの起動
 ```
-docker-compose up
+docker compose up
 ```
 ### 構築時遭遇したトラブル
 [docディレクトリにメモあり](/doc)

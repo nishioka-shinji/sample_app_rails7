@@ -1,0 +1,4 @@
+一度起動してdownし、再度起動した時にerror adding listener addr=アプリ名/shared/tmp/sockets/unicorn.sock
+ローカルでファイル消すと起動成功。
+ただコンテナ内では消せない（つまりコンテナ実行時にコマンドで消せない）
+rails_appとnginx間のファイル共有方法がおかしかったみたいので、volume属性を修正した
