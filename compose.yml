@@ -1,6 +1,6 @@
 services:
   db:
-    image: mysql:8.1.0-oracle
+    image: mysql:8.2.0-oracle
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: root
