@@ -37,9 +37,10 @@ docker build --platform=linux/amd64 -f docker/rails/Dockerfile -t sample_app_rai
 awslocal sqs create-queue --queue-name my-queue
 ```
 ### Lambda関数コード作成
-あらかじめ作成してzip化しておく
+Serverless Frameworkでパッケージし、zipファイルを作成
 ```
-zip function.zip lambda_function.py
+cd serverless
+sls package
 ```
 ### Lambda作成
 ```
@@ -48,13 +49,13 @@ awslocal lambda create-function \
     --runtime python3.8 \
     --role arn:aws:iam::123456789012:role/lambda-role \
     --handler lambda_function.lambda_handler \
-    --zip-file fileb://~/develop/sample_app_rails7/serverless/function.zip
+    --zip-file fileb://~/develop/sample_app_rails7/serverless/.serverless/sample-app-rails7-project.zip
 ```
 ### Lambda更新
 ```
 awslocal lambda update-function-code \
     --function-name my-function \
-    --zip-file fileb://~/develop/sample_app_rails7/serverless/function.zip
+    --zip-file fileb://~/develop/sample_app_rails7/serverless/.serverless/sample-app-rails7-project.zip
 ```
 ### Lambda と SQS の統合
 ```

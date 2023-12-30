@@ -33,3 +33,6 @@
 /config/credentials/development.key
 
 .DS_Store
+
+# Serverless directories
+.serverless
