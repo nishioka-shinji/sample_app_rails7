@@ -43,7 +43,8 @@ services:
       - DOCKER_HOST=unix:///var/run/docker.sock
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - ./serverless:/opt/code/localstack/serverless
+      - ./serverless/.serverless:/opt/code/localstack/lambda_functions
+      - "./scripts/localstack:/etc/localstack/init/ready.d"
 
 volumes:
   sockets:
