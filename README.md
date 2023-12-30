@@ -31,3 +31,37 @@ docker compose up
 docker build --platform=linux/amd64 -f docker/nginx/Dockerfile -t sample_app_rails_7/nginx .
 docker build --platform=linux/amd64 -f docker/rails/Dockerfile -t sample_app_rails_7/rails .
 ```
+## localstack
+### SQS作成
+```
+awslocal sqs create-queue --queue-name my-queue
+```
+### Lambda関数コード作成
+あらかじめ作成してzip化しておく
+```
+zip function.zip lambda_function.py
+```
+### Lambda作成
+```
+awslocal lambda create-function \
+    --function-name my-function \
+    --runtime python3.8 \
+    --role arn:aws:iam::123456789012:role/lambda-role \
+    --handler lambda_function.lambda_handler \
+    --zip-file fileb://~/develop/sample_app_rails7/serverless/function.zip
+```
+### Lambda更新
+```
+awslocal lambda update-function-code \
+    --function-name my-function \
+    --zip-file fileb://~/develop/sample_app_rails7/serverless/function.zip
+```
+### Lambda と SQS の統合
+```
+awslocal lambda create-event-source-mapping \
+    --function-name my-function \
+    --event-source-arn arn:aws:sqs:us-east-1:000000000000:my-queue
+```
+### ログ
+SQSはlocalstackコンテナ
+Lambdaは実行時に新たにコンテナが作成されるので、そこから確認できる
