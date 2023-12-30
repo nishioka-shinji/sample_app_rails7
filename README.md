@@ -1,8 +1,8 @@
 # sample_app_rails7
 ![](https://img.shields.io/badge/rails-7.0.8-red.svg)
 ![](https://img.shields.io/badge/ruby-3.2.2-orange.svg)
-![](https://img.shields.io/badge/mysql-8.1.0-blue.svg)
-![](https://img.shields.io/badge/nginx-1.25.2-green.svg)
+![](https://img.shields.io/badge/mysql-8.2.0-blue.svg)
+![](https://img.shields.io/badge/nginx-1.25.3-green.svg)
 
 ## こちらを参考に構築
 https://qiita.com/croquette0212/items/7b99d9339fd773ddf20b
