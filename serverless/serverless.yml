@@ -1,0 +1,15 @@
+org: nishiokashinji
+app: sample-app-rails7-project
+service: sample-app-rails7-project
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.8
+
+functions:
+  pythonScript:
+    handler: lambda_function.lambda_handler
+    events:
+      - sqs:
+          arn: arn:aws:sqs:us-east-1:678750362522:sample_app_rails7_sqs
