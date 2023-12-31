@@ -76,4 +76,4 @@ group :test do
   gem "webdrivers"
 end
 
-gem "aws-sdk-sqs"
+gem "aws-sdk-rails"
