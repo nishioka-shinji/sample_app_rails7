@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# SQS + Lambda
 awslocal sqs create-queue --queue-name my-queue
 awslocal lambda create-function \
     --function-name my-function \
@@ -9,3 +11,6 @@ awslocal lambda create-function \
 awslocal lambda create-event-source-mapping \
     --function-name my-function \
     --event-source-arn arn:aws:sqs:us-east-1:000000000000:my-queue
+
+# SQS + ActiveJob
+awslocal sqs create-queue --queue-name my-queue2
