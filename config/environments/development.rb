@@ -73,4 +73,7 @@ Rails.application.configure do
 
   # ログを標準出力
   config.logger = ActiveSupport::Logger.new(STDOUT)
+
+  # 非同期処理
+  config.active_job.queue_adapter = :amazon_sqs
 end
