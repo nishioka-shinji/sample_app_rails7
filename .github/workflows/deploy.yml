@@ -1,0 +1,91 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - feature/ci  # メインブランチへのプッシュでこのワークフローをトリガー
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest  # ワークフローを実行する環境
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4  # リポジトリのコードをチェックアウト
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}  # GitHub SecretsからAWSの認証情報を取得
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1  # AWSのリージョン
+
+      - name: Login to Amazon ECR Public
+        id: login-ecr-public
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          registry-type: public
+
+      - name: Build, tag, and push docker image to Amazon ECR Public
+        env:
+          REGISTRY: ${{ steps.login-ecr-public.outputs.registry }}
+          REGISTRY_ALIAS: p5j2o4y6
+          RAILS_REPOSITORY: sample_app_rails_7/rails
+          NGINX_REPOSITORY: sample_app_rails_7/nginx
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          RAILS_PATH="$REGISTRY/$REGISTRY_ALIAS/$RAILS_REPOSITORY"
+          NGINX_PATH="$REGISTRY/$REGISTRY_ALIAS/$NGINX_REPOSITORY"
+
+          echo "RAILS_PATH=$RAILS_PATH" >> "$GITHUB_ENV"
+          echo "NGINX_PATH=$NGINX_PATH" >> "$GITHUB_ENV"
+          echo "IMAGE_TAG=$IMAGE_TAG" >> "$GITHUB_ENV"
+
+          docker build -t $RAILS_PATH:$IMAGE_TAG -f docker/rails/Dockerfile .
+          docker tag $RAILS_PATH:$IMAGE_TAG $RAILS_PATH:latest
+          docker push $RAILS_PATH:$IMAGE_TAG
+          docker push $RAILS_PATH:latest
+
+          docker build -t $NGINX_PATH:$IMAGE_TAG -f docker/nginx/Dockerfile .
+          docker tag $NGINX_PATH:$IMAGE_TAG $NGINX_PATH:latest
+          docker push $NGINX_PATH:$IMAGE_TAG
+          docker push $NGINX_PATH:latest
+
+      - name: Render Amazon ECS sample_app_rails7_task definition for rails container
+        id: render-rails-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: .github/workflows/task-definition/task-definition.json
+          container-name: rails7
+          image: ${{ env.RAILS_PATH }}:${{ env.IMAGE_TAG }}
+
+      - name: Modify Amazon ECS task sample_app_rails7_task with nginx container
+        id: render-nginx-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ steps.render-rails-container.outputs.task-definition }}
+          container-name: nginx
+          image: ${{ env.NGINX_PATH }}:${{ env.IMAGE_TAG }}
+
+      - name: Deploy to Amazon ECS service
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.render-nginx-container.outputs.task-definition }}
+
+      - name: Render Amazon ECS sample_app_rails7_task definition
+        id: render-run-task-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: .github/workflows/task-definition/run-task-definition.json
+          container-name: rails7
+          image: ${{ env.RAILS_PATH }}:${{ env.IMAGE_TAG }}
+
+      - name: Deploy to Amazon ECS service
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.render-run-task-container.outputs.task-definition }}
