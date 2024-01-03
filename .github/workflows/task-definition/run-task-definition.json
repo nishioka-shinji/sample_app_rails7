@@ -32,11 +32,11 @@
             "secrets": [
                 {
                     "name": "RAILS_MASTER_KEY",
-                    "valueFrom": "arn:aws:secretsmanager:us-east-1:678750362522:secret:sample_app_rails7_secret-cfkt56:rails_master_key"
+                    "valueFrom": "arn:aws:secretsmanager:us-east-1:678750362522:secret:sample_app_rails7_secret-cfkt56:rails_master_key::"
                 },
                 {
                     "name": "MYSQL_PASSWORD",
-                    "valueFrom": "arn:aws:secretsmanager:us-east-1:678750362522:secret:sample_app_rails7_secret-cfkt56:mysql_password"
+                    "valueFrom": "arn:aws:secretsmanager:us-east-1:678750362522:secret:sample_app_rails7_secret-cfkt56:mysql_password::"
                 }
             ],
             "dnsServers": [],
