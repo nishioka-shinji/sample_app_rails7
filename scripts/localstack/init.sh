@@ -13,4 +13,4 @@ awslocal lambda create-event-source-mapping \
     --event-source-arn arn:aws:sqs:us-east-1:000000000000:my-queue
 
 # SQS + ActiveJob
-awslocal sqs create-queue --queue-name my-queue2
+awslocal sqs create-queue --queue-name sample_app_rails7_sqs
