@@ -1,7 +1,7 @@
 class Sample::JobsController < ApplicationController
   def index
     sqs = SqsService.new
-    a = sqs.receive_messages("http://localstack:4566/000000000000/my-queue", 10, 1)
+    a = sqs.receive_messages("http://localstack:4566/000000000000/sample_app_rails7_sqs_dlq", 10, 1)
     b = sqs.receive_messages("http://localstack:4566/000000000000/sample_app_rails7_sqs", 10, 1)
     render plain: "#{a}\n\n#{b}"
   end
@@ -15,7 +15,7 @@ class Sample::JobsController < ApplicationController
     }.to_json
 
     sqs.send_message(
-      "http://localstack:4566/000000000000/my-queue",
+      "http://localstack:4566/000000000000/sample_app_rails7_sqs_dlq",
       msg
     )
 
