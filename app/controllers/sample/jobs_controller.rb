@@ -7,20 +7,9 @@ class Sample::JobsController < ApplicationController
   end
 
   def create
-    # Lambda用のキュー
-    sqs = SqsService.new
-    msg = {
-      key: Time.zone.now.to_i.to_s,
-      value: "こんにちは"
-    }.to_json
-
-    sqs.send_message(
-      "http://localstack:4566/000000000000/sample_app_rails7_sqs_dlq",
-      msg
-    )
-
     # actuve_job用のキュー
     SampleJob.perform_later(Time.zone.now)
+    ErrorJob.perform_later(Time.zone.now)
     redirect_to root_path
   end
 end
