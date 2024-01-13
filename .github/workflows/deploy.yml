@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - feature/ci  # メインブランチへのプッシュでこのワークフローをトリガー
+      - feature/main  # メインブランチへのプッシュでこのワークフローをトリガー
 
 jobs:
   deploy:

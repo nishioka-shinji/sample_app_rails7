@@ -23,16 +23,22 @@
             ],
             "environment": [
                 {
-                    "name": "MYSQL_HOST",
-                    "value": "database-2.ch61wkeabw10.us-east-1.rds.amazonaws.com"
-                },
-                {
                     "name": "RAILS_ENV",
-                    "value": "development"
+                    "value": "dev_ecs"
                 }
             ],
             "mountPoints": [],
             "volumesFrom": [],
+            "secrets": [
+                {
+                    "name": "RAILS_MASTER_KEY",
+                    "valueFrom": "arn:aws:secretsmanager:us-east-1:678750362522:secret:sample_app_rails7_secret-cfkt56:rails_master_key::"
+                },
+                {
+                    "name": "MYSQL_PASSWORD",
+                    "valueFrom": "arn:aws:secretsmanager:us-east-1:678750362522:secret:sample_app_rails7_secret-cfkt56:mysql_password::"
+                }
+            ],
             "dnsServers": [],
             "dnsSearchDomains": [],
             "dockerSecurityOptions": [],
@@ -40,6 +46,7 @@
         }
     ],
     "taskRoleArn": "arn:aws:iam::678750362522:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::678750362522:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
     "requiresCompatibilities": [
         "FARGATE"

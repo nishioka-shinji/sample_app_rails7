@@ -21,6 +21,16 @@ development:
   <<: *default
   database: sample_app_rails7_development
 
+dev_ecs:
+  <<: *default
+  adapter: mysql2
+  database: sample_app_rails7_dev_ecs
+  username: jjolvspboew8fnocb6ey
+  host: aws.connect.psdb.cloud
+  password: <%= ENV["MYSQL_PASSWORD"] %>
+  ssl_mode: verify_identity
+  sslca: "/etc/ssl/cert.pem"
+
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
