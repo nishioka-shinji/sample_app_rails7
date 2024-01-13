@@ -77,3 +77,6 @@ group :test do
 end
 
 gem "aws-sdk-rails"
+
+gem "sentry-ruby"
+gem "sentry-rails"
