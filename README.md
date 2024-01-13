@@ -34,7 +34,7 @@ docker build --platform=linux/amd64 -f docker/rails/Dockerfile -t sample_app_rai
 ## localstack
 ### SQS作成
 ```
-awslocal sqs create-queue --queue-name my-queue
+awslocal sqs create-queue --queue-name sample_app_rails7_sqs_dlq
 ```
 ### Lambda関数コード作成
 Serverless Frameworkでパッケージし、zipファイルを作成
@@ -61,7 +61,7 @@ awslocal lambda update-function-code \
 ```
 awslocal lambda create-event-source-mapping \
     --function-name my-function \
-    --event-source-arn arn:aws:sqs:us-east-1:000000000000:my-queue
+    --event-source-arn arn:aws:sqs:us-east-1:000000000000:sample_app_rails7_sqs_dlq
 ```
 ### ログ
 SQSはlocalstackコンテナ
